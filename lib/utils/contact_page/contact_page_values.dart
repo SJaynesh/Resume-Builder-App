@@ -8,4 +8,6 @@ class ContactPageVal {
   static String? gender;
   static bool hindi = false;
   static bool english = false;
+  static bool declaration = false;
+  static List<String> technicalSkill = [];
 }

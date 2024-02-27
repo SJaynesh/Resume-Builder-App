@@ -29,7 +29,7 @@ List<Map<String, dynamic>> buildOptionList = [
   {
     'image': "${imagePath}Tech.png",
     'title': "Technical Skills",
-    'route': "contact_info",
+    'route': "skills",
   },
   {
     'image': "${imagePath}Hobby.png",
@@ -54,6 +54,6 @@ List<Map<String, dynamic>> buildOptionList = [
   {
     'image': "${imagePath}Declaration.png",
     'title': "Declaration",
-    'route': "contact_info",
+    'route': "declaration",
   },
 ];

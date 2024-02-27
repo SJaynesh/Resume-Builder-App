@@ -5,5 +5,7 @@ class Routes {
 
   static const String contactInfo = "contact_info";
   static const String personalDetail = "personal_detail";
+  static const String declaration = "declaration";
+  static const String skills = "skills";
   static const String buttonPage = "button_page";
 }
