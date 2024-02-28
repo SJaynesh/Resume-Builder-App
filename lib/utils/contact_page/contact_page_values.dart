@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+
 class ContactPageVal {
   static String name = "Raj Kumar";
   static String phoneNumber = "8769321445";
@@ -10,4 +12,6 @@ class ContactPageVal {
   static bool english = false;
   static bool declaration = false;
   static List<String> technicalSkill = [];
+  static List<TextEditingController> technicalController = [];
+  // static List<String> skill = ["C Programming", "C++" ,];
 }
