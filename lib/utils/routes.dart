@@ -8,4 +8,5 @@ class Routes {
   static const String declaration = "declaration";
   static const String skills = "skills";
   static const String buttonPage = "button_page";
+  static const String pdfPage = "pdf_page";
 }

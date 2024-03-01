@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ContactPageVal {
-  static String name = "Raj Kumar";
-  static String phoneNumber = "8769321445";
-  static String password = "xyz@123";
+  static String name = "";
+  static String phoneNumber = "";
+  static String password = "";
   static File? image;
   static String? gender;
   static bool hindi = false;

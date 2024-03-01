@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:resume_builder_app/utils/contact_page/contact_page_values.dart';
-import 'package:resume_builder_app/view/screens/contact_info.dart';
 
 class TechnicalSkillPage extends StatefulWidget {
   const TechnicalSkillPage({super.key});

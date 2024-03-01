@@ -1,8 +1,12 @@
-import 'dart:ui';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:printing/printing.dart';
 import 'package:resume_builder_app/utils/resume_atributes.dart';
 import 'package:resume_builder_app/utils/routes.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +16,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<void> pdfView() async {
+    pw.Document pdf = pw.Document(); // ClassName objName = ClassName();
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Text(
+              "Hello World",
+              style: pw.TextStyle(
+                fontSize: 80,
+                color: PdfColors.blue,
+                fontWeight: pw.FontWeight.bold,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+    Uint8List data = await pdf.save();
+    Printing.layoutPdf(
+      onLayout: (format) => data,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     TextScaler textScaler = MediaQuery.of(context).textScaler;
@@ -25,19 +53,37 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: Container(
-                width: w,
-                color: const Color(0xff6054C1),
-                alignment: Alignment.center,
-                child: Text(
-                  "Resume Builder",
-                  style: TextStyle(
-                    fontSize: textScaler.scale(25),
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1,
-                  ),
-                ),
-              ),
+                  width: w,
+                  color: const Color(0xff6054C1),
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "Resume Builder",
+                            style: TextStyle(
+                              fontSize: textScaler.scale(25),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // pdfView();
+                          log("PDF Clicked");
+                          Navigator.of(context).pushNamed(Routes.pdfPage);
+                        },
+                        icon: const Icon(
+                          Icons.picture_as_pdf,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  )),
             ),
             Expanded(
               flex: 6,
