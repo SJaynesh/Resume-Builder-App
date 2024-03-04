@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:resume_builder_app/utils/contact_page/contact_page_values.dart';
+import 'package:resume_builder_app/view/screens/contact_info.dart';
 
 class PDFPage extends StatefulWidget {
   const PDFPage({super.key});
@@ -15,6 +17,9 @@ class PDFPage extends StatefulWidget {
 class _PDFPageState extends State<PDFPage> {
   Future<Uint8List> pdfView() async {
     pw.Document pdf = pw.Document();
+
+    var netWorkImage = await networkImage(
+        "https://e7.pngegg.com/pngimages/906/448/png-clipart-silhouette-person-person-with-helmut-animals-logo-thumbnail.png");
 
     pdf.addPage(
       pw.Page(
@@ -43,11 +48,42 @@ class _PDFPageState extends State<PDFPage> {
                 color: const PdfColor.fromInt(0xffddd0d1),
               ),
               pw.Positioned(
-                left: 20,
+                left: 15,
                 child: pw.Container(
                   height: 728,
                   width: 200,
                   color: const PdfColor.fromInt(0xffb39e9f),
+                  child: pw.Column(
+                    children: [
+                      pw.Container(
+                        height: 160,
+                        width: 160,
+                        margin: const pw.EdgeInsets.only(
+                          top: 20,
+                        ),
+                        decoration: const pw.BoxDecoration(
+                          color: PdfColors.white,
+                          shape: pw.BoxShape.circle,
+                        ),
+                        alignment: pw.Alignment.center,
+                        child: pw.Container(
+                          height: 150,
+                          width: 150,
+                          decoration: pw.BoxDecoration(
+                            color: PdfColors.grey,
+                            shape: pw.BoxShape.circle,
+                            image: pw.DecorationImage(
+                              image: (ContactPageVal.image != null)
+                                  ? pw.MemoryImage(
+                                      ContactPageVal.image!.readAsBytesSync(),
+                                    )
+                                  : netWorkImage,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
