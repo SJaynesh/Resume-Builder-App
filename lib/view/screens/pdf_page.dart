@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -18,8 +19,12 @@ class _PDFPageState extends State<PDFPage> {
   Future<Uint8List> pdfView() async {
     pw.Document pdf = pw.Document();
 
-    var netWorkImage = await networkImage(
-        "https://e7.pngegg.com/pngimages/906/448/png-clipart-silhouette-person-person-with-helmut-animals-logo-thumbnail.png");
+    String assetImagePath = "assets/images/call.png";
+
+    ByteData assetImage = await rootBundle.load(assetImagePath);
+
+    var image = await networkImage(
+        "https://clipart-library.com/8300/2368/clipart--person-icon--cliparts-15.png");
 
     pdf.addPage(
       pw.Page(
@@ -46,6 +51,22 @@ class _PDFPageState extends State<PDFPage> {
                 height: 200,
                 width: double.infinity,
                 color: const PdfColor.fromInt(0xffddd0d1),
+                child: pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.end,
+                  children: [
+                    pw.Spacer(
+                      flex: 2,
+                    ),
+                    pw.Text(
+                      "${ContactPageVal.name.split(" ")[0]}\n${ContactPageVal.name.split(" ")[1]}",
+                      style: pw.TextStyle(
+                        fontSize: 35,
+                        font: pw.Font.timesBold(),
+                      ),
+                    ),
+                    pw.Spacer(),
+                  ],
+                ),
               ),
               pw.Positioned(
                 left: 15,
@@ -77,10 +98,41 @@ class _PDFPageState extends State<PDFPage> {
                                   ? pw.MemoryImage(
                                       ContactPageVal.image!.readAsBytesSync(),
                                     )
-                                  : netWorkImage,
+                                  : image,
                             ),
                           ),
                         ),
+                      ),
+                      pw.SizedBox(
+                        height: 50,
+                      ),
+                      pw.Text(
+                        "Contact Me",
+                        style: pw.TextStyle(
+                          fontSize: 25,
+                          color: PdfColors.white,
+                          font: pw.Font.timesBold(),
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.center,
+                        children: [
+                          pw.Image(
+                            pw.MemoryImage(
+                              assetImage.buffer.asUint8List(),
+                            ),
+                            height: 50,
+                          ),
+                          pw.Text(
+                            ContactPageVal.phoneNumber,
+                            style: pw.TextStyle(
+                              fontSize: 18,
+                              color: PdfColors.white,
+                              font: pw.Font.times(),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
